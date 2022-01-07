@@ -19,7 +19,9 @@
         </nav>
         <hr>
     </header>
-    <h3><%=message%></h3>
+    <%for(let i=0; i < notes.length;i++) { %>
+    <h3><%=notes[i].note%> -- <i><%=notes[i].name%></i></h3>
+    <% } %>
     
 </body>
 </html>

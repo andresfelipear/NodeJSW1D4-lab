@@ -20,11 +20,20 @@ router.get('/write', (req, res, next) => {
 //route read-message
 router.get('/read', (req, res, next) => {
     fs.readFile('notes.txt', 'utf8', (err, data) => {
-        if (err) throw err
-        res.render('read-message', { message: data })
-    })
+        let notes = []
 
-    // res.sendFile(path.join(rootDirectory, 'views', 'read-message.html'))
+        if(!err){
+            try{
+                notes = JSON.parse(data)
+            }catch(e){
+                fs.writeFileSync("wishes.txt", [])
+                notes = []
+            }
+        }
+        data = notes
+
+        res.render('read-message', { data: notes })
+    })
 })
 
 //route post /message (manage submit form)
